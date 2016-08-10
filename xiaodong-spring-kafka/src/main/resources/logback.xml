@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<timestamp key="byDay" datePattern="yyyy-MM-dd"/>
+	<timestamp key="byHour" datePattern="yyyy-MM-dd-HH"/>
+	<property name="log.dir" value="/opt/log/xiaodong.spring.kafka.log" />
+
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="fileAppender" class="ch.qos.logback.core.FileAppender">
+		<file>${log.dir}</file>
+		<append>true</append>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}, %p, %m%n</pattern>
+		</layout>
+	</appender>
+	<root>
+		<level value="INFO"/>
+		<appender-ref ref="CONSOLE"/>
+	</root>
+
+	<logger name="com.xiaodong.spring.kafka" additivity="false" level="INFO">
+		<appender-ref ref="CONSOLE"/>
+		<appender-ref ref="fileAppender"/>
+	</logger>
+
+	<include resource="org/springframework/boot/logging/logback/base.xml"/>
+	<jmxConfigurator/>
+</configuration>
